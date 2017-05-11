@@ -21,7 +21,7 @@
 			and a.parent_id = #{parentId}
 		</if>
 	</select>
-	<select id="queryResourceByprimaryKey" resultType="com.ofly.core.admin.vo.TreeNode">
+	<select id="queryResourceByprimaryKey" resultType="com.ofly.core.admin.vo.ResourceVo">
 		select * from sec_resources where id = #{id}
 	</select>
 	<insert id="saveResourcesNode" parameterType="com.ofly.core.admin.vo.TreeNode">
@@ -30,6 +30,22 @@
 		VALUES 
 			(#{parentId}, #{name})
 	</insert>
+	<insert id="saveResource" parameterType="com.ofly.core.admin.vo.ResourceVo">
+		INSERT INTO  sec_resources 
+			(parent_id, name, url,type,is_menu) 
+		VALUES 
+			(#{parentId}, #{name},#{url},'02',#{isMenu})
+	</insert>
+	<update id="updateResource" parameterType="com.ofly.core.admin.vo.ResourceVo">
+		UPDATE 
+			sec_resources 
+		SET 
+			name=#{name},
+			url =#{url},
+			is_Menu=#{isMenu}
+		WHERE 
+			id=#{id}
+	</update>
 	<update id="updateResourcesNode" parameterType="com.ofly.core.admin.vo.TreeNode">
 		UPDATE 
 			sec_resources 
@@ -52,4 +68,37 @@
 		where 
 			id = #{id}
 	</delete>
+	<select id="queryList" parameterType="map" resultType="com.ofly.core.admin.vo.ResourceVo">
+		SELECT 
+		    *
+		FROM
+		    sec_resources
+		WHERE
+		    parent_id = #{parentId}
+		AND
+			type = '02'
+		AND (
+			name LIKE CONCAT('%', #{condition}, '%')
+		OR 
+			url LIKE CONCAT('%', #{condition}, '%')
+		 )
+		<if test="rows!=null and offset!=null">
+        limit #{offset}, #{rows}
+        </if>
+	</select>
+	<select id="queryListNum" parameterType="map" resultType="int">
+		SELECT 
+		    count(1)
+		FROM
+		    sec_resources
+		WHERE
+		    parent_id = #{parentId}
+		AND
+			type = '02'
+		AND (
+			name LIKE CONCAT('%', #{condition}, '%')
+		OR 
+			url LIKE CONCAT('%', #{condition}, '%')
+		 )
+	</select>
 </mapper>

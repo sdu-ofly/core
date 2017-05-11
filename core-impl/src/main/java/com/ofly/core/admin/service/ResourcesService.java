@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ofly.core.admin.api.IResourcesService;
 import com.ofly.core.admin.dao.IResourcesDao;
+import com.ofly.core.admin.vo.ResourceVo;
 import com.ofly.core.admin.vo.TreeNode;
 
 @Service
@@ -41,9 +42,9 @@ public class ResourcesService implements IResourcesService {
 		return result;
 	}
 	@Override
-	public TreeNode queryResourceByprimaryKey(String id) {
-		TreeNode node = dao.queryResourceByprimaryKey(id);
-		return node;
+	public ResourceVo queryResourceByprimaryKey(String id) {
+		ResourceVo vo = dao.queryResourceByprimaryKey(id);
+		return vo;
 	}
 	@Override
 	public boolean hasResourcesChildNode(String id) {
@@ -62,5 +63,34 @@ public class ResourcesService implements IResourcesService {
 		}
 		return result;
 	}
-
+	@Override
+	public List<ResourceVo> queryList(Map<String, Object> params) {
+		List<ResourceVo> list = dao.queryList(params);
+		return list;
+	}
+	@Override
+	public int queryListNum(Map<String, Object> params) {
+		int num = dao.queryListNum(params);
+		return num;
+	}
+	@Override
+	public Map<String, Object> saveResource(ResourceVo vo) {
+		Map<String, Object> result = new HashMap<>();
+		int i = 0;
+		if(vo.getId()==null ||"".equals(vo.getId())) {
+			i = dao.saveResource(vo);
+		} else {
+			i = dao.updateResource(vo);
+		}
+		
+		result.put("code", i);
+		if(i==0) {
+			result.put("msg", "保存失败");
+		} else {
+			result.put("msg", "保存成功");
+		}
+		return result;
+	}
+	
+		
 }

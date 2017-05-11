@@ -33,7 +33,7 @@ var tree = (function() {
 	 * @Create Time		: 2017年5月11日 下午1:11:46
 	 * @Introduction	: 初始化资源树
 	 */
-	var initResourcesTree = function(id) {
+	var initResourcesTree = function(id,options) {
 		//初始化右键菜单
 		_initRightMenus();
 		var setting = {
@@ -43,16 +43,8 @@ var tree = (function() {
 					url			: ctx+'/tree/queryResources'
 				},
 				callback: {
-					onDblClick	: function(event, treeId, treeNode) {
-						debugger;
-					},
-					onRightClick: function(event, treeId, treeNode) {
-						_curResourcesNode = treeNode;
-						$('#mm').menu('show', {    
-							left: event.pageX,
-							top: event.pageY    
-						});
-					}
+					onDblClick	: options.resourcesDblClick,
+					onRightClick: _resourcesRightMenus
 				},
 				view	: {
 					showLine	: false
@@ -81,6 +73,13 @@ var tree = (function() {
 			text: '删除',
 			iconCls: 'icon-cancel',
 			onclick: _deleteResourcesNode
+		});
+	}
+	var _resourcesRightMenus = function(event, treeId, treeNode) {
+		_curResourcesNode = treeNode;
+		$('#mm').menu('show', {    
+			left: event.pageX,
+			top: event.pageY    
 		});
 	}
 	var _addResourcesNode = function(event) {

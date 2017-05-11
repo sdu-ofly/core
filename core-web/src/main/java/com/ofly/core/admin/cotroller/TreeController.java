@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ofly.core.admin.api.IResourcesService;
+import com.ofly.core.admin.vo.ResourceVo;
 import com.ofly.core.admin.vo.TreeNode;
 
 @Controller
@@ -35,8 +36,8 @@ public class TreeController {
 	
 	@RequestMapping("/editResourcesNode")
 	public String editResourcesNode(Model m, String id) {
-		TreeNode node = resourcesService.queryResourceByprimaryKey(id);
-		m.addAttribute("node", node);
+		ResourceVo vo = resourcesService.queryResourceByprimaryKey(id);
+		m.addAttribute("node", vo);
 		return PATH_ADD_RESOURCES;
 	}
 	
