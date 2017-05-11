@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ofly.core.admin.dao.IResourcesDao">
+	<select id="queryResources" resultType="com.ofly.core.admin.vo.TreeNode">
+		select 
+			a.*,
+		    if((SELECT 
+		            COUNT(1)
+		        FROM
+		            sec_resources b
+		        WHERE
+		            a.id = b.parent_id) = 0,0,1 )  is_Parent 
+		FROM
+    		sec_resources a
+		where 
+			a.type='01'
+		<if test="parentId==null">
+			and isnull(a.parent_id)
+		</if>
+		<if test="parentId!=null">
+			and a.parent_id = #{parentId}
+		</if>
+	</select>
+	<select id="queryResourceByprimaryKey" resultType="com.ofly.core.admin.vo.TreeNode">
+		select * from sec_resources where id = #{id}
+	</select>
+	<insert id="saveResourcesNode" parameterType="com.ofly.core.admin.vo.TreeNode">
+		INSERT INTO  sec_resources 
+			(parent_id, name) 
+		VALUES 
+			(#{parentId}, #{name})
+	</insert>
+	<update id="updateResourcesNode" parameterType="com.ofly.core.admin.vo.TreeNode">
+		UPDATE 
+			sec_resources 
+		SET 
+			name=#{name}
+		WHERE 
+			id=#{id}
+	</update>
+	<select id="hasResourcesChildNode" resultType="int">
+		select 
+			count(1) 
+		from 
+			sec_resources
+		where 
+			parent_id = #{id}
+	</select>
+	<delete id="deleteResourcesNode">
+		delete from 
+			sec_resources
+		where 
+			id = #{id}
+	</delete>
+</mapper>

@@ -1,7 +1,4 @@
-﻿$(function() {
-	admin.init();
-});
-/**
+﻿/**
  * @Author			: Logan
  * @Create Time		: 2017年5月10日 下午5:03:00
  * @Introduction	: 
@@ -10,6 +7,7 @@ var admin = (function() {
 	var _this = this;
 	var TABS_ID = "admin_tabs";
 	var ctx = $('#ctx').val();
+	
 	/**
 	 * @Author			: Logan
 	 * @Create Time		: 2017年5月10日 下午5:05:49
@@ -25,8 +23,12 @@ var admin = (function() {
 	 */
 	var _initTree = function() {
 		var setting = {
-			callback	:{
-				onDblClick	: _treeDblClick
+			callback: {
+				onDblClick	: _treeDblClick,
+				onRightClick: _treeRightClick
+			},
+			view	: {
+				showLine	: false
 			}
 		};
 		var zNodes =[
@@ -41,7 +43,7 @@ var admin = (function() {
 	 * @Create Time		: 2017年5月10日 下午9:36:16
 	 * @Introduction	: 双击导航树
 	 */
-	var _treeDblClick = function(event, treeId, treeNode) {
+	var treeDblClick = function(event, treeId, treeNode) {
 		var allTabs = $('#'+TABS_ID).tabs("tabs");
 		var isTabExist = false;
 		var curTabIndex = -1;//-1表示不存在
@@ -67,10 +69,10 @@ var admin = (function() {
 		} else {		// 已存在，选中该tab
 			$('#'+TABS_ID).tabs("select", curTabIndex);
 		}
-		
 	}
 	
 	_this.init = init;	// 初始化Admin
+	_this.treeDblClick = treeDblClick;	// 初始化Admin
 	return _this;
 })();
 

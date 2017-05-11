@@ -6,6 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="../../common/common.jsp"></jsp:include>
 <title>Admin</title>
+<style type="text/css">
+	.tabs-header,.tabs-panels {
+	border: none;
+}
+</style>
 </head>
 <input id="ctx" value="<%=request.getContextPath()%>" type="hidden">
 <body class="easyui-layout" style="width:100%;height: 100%;">
@@ -19,6 +24,14 @@
 			
 		</div>
 	</div>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/core/admin/tree.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/core/admin/admin.js"></script>
+<script type="text/javascript">
+$(function() {
+	tree.initAdminNavigation("tree",{
+		onDblClick	: admin.treeDblClick
+	});
+});
+</script>
 </body>
 </html>
