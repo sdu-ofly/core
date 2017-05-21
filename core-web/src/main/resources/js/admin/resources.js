@@ -16,7 +16,7 @@ var resources = (function(){
 			$('#resourcesForm').find('#parentName').val(treeNode.name);
 			if(!url){
 				$('#resourcesForm').find('#datagrid').datagrid({
-					url			: ctx +'/resources/queryList',
+					url			: ctx +'/admin/resources/queryList',
 					queryParams	: {
 						parentId	: treeNode.id,
 						condition	: $('#resourcesForm').find('#condition').val()
@@ -42,9 +42,20 @@ var resources = (function(){
 			condition	: $('#resourcesForm').find('#condition').val()
 		});
 	}
-	
+	var isMenuFormat = function(value, row, index) {
+		if(value == 1){
+			return '<span style="color: hsl(187, 100%, 42%);font-size: 18px;">√</span>';
+		} else {
+			return "";
+		}
+	}
 	var addResource = function() {
-		var url= ctx + '/resources/addResource';
+		if(!$('#resourcesForm').find('#parentId').val()) {
+			OFLY.message("请先选择要保存的资源文件夹");
+			return;
+		}
+		
+		var url= ctx + '/admin/resources/addResource';
 		var params = {
 			parentId	: $('#resourcesForm').find('#parentId').val(),
 			parentName	: $('#resourcesForm').find('#parentName').val()
@@ -58,9 +69,15 @@ var resources = (function(){
 		OFLY.dialog("addResourceDialog", url, params, "新增", _width, _height, buttons);
 	}
 	var editResource = function() {
-		var url = ctx + '/resources/editResource';
+		if(!_editResourceValid()) {
+			return;
+		}
+		var row = $('#resourcesForm').find('#datagrid').datagrid("getSelected");
+		var url = ctx + '/admin/resources/editResource';
 		var params = {
-			id	: '1'
+			id			: row.id,
+			parentId	: $('#resourcesForm').find('#parentId').val(),
+			parentName	: $('#resourcesForm').find('#parentName').val()
 		};
 		var buttons = [{
 			text	: '保存',
@@ -70,27 +87,81 @@ var resources = (function(){
 		}];
 		OFLY.dialog("addResourceDialog", url, params, "新增", _width, _height, buttons);
 	}
+	var _editResourceValid = function() {
+		var  selectedRows = $('#resourcesForm').find('#datagrid').datagrid("getSelections");
+		if(selectedRows==null || selectedRows.length==0) {
+			OFLY.message("请选择一条数据");
+			return false;
+		} else 
+		if(selectedRows.length>1){
+			OFLY.message("只能选择提条数据");
+			return false;
+		}
+		return true;
+	}
 	var deleteResource = function() {
-		debugger;
+		if(!_deleteResourceValid()) {
+			return;
+		}
+		var ids = new Array();
+		var rows = $('#resourcesForm').find('#datagrid').datagrid('getSelections');
+		$.each(rows,function(index, item) {
+			ids.push(item.id);
+		});
+		var url = ctx + '/admin/resources/deleteResource';
+		var params = {
+			ids	: JSON.stringify(ids)
+		};
+		var msg = '';
+		if(rows.length ==1) {
+			
+	    
+			msg = '确认删除[<span style="font-size: 16px;color: hsl(0, 100%, 50%);">'+rows[0].name+'</span>]资源?';
+		} else {
+			msg = '确认删除[<span style="font-size: 16px;color: hsl(0, 100%, 50%);">'+rows.length+'</span>]条资源';
+		}
+		OFLY.confirm('提示框', msg, function() {
+			$.post(url, params, function(data) {
+				OFLY.message(data.msg, function() {
+					if(data.code == 1) {
+						$('#resourcesForm').find('#datagrid').datagrid("reload");
+					}
+				});
+			})
+		});
+		
+	}
+	
+	var _deleteResourceValid = function() {
+		var rows = $('#resourcesForm').find('#datagrid').datagrid('getSelections');
+		if(rows == null || rows.length==0) {
+			OFLY.message('请选择一些准备删除的数据');
+			return false;
+		}
+		return true;
 	}
 	
 	var _saveResource = function() {
 		if(!_saveResourceValid()) {
 			return;
 		}
-		var url = ctx + '/resources/saveResource';
+		var url = ctx + '/admin/resources/saveResource';
 		var params = {
+			id			: $('#addResourceForm').find('#id').val(),
 			parentId	: $('#addResourceForm').find('#parentId').val(),
 			name		: $('#addResourceForm').find('#name').textbox("getValue"),
 			url			: $('#addResourceForm').find('#url').textbox("getValue"),
-			isMenu		: $('#addResourceForm').find('input[name="isMenu"]:checked').val()
+			isMenu		: $('#addResourceForm').find('input[name="isMenu"]:checked').val(),
+			auth		: $('#addResourceForm').find('input[name="auth"]:checked').val()
 		}
-		$.post(url, params, function(data){
-			OFLY.message(data.msg, function() {
-				if(data.code == 1) {
-					$('#resourcesForm').find('#datagrid').datagrid("reload");
-					OFLY.dialog.close("addResourceDialog");
-				}
+		OFLY.confirm('提示框', '确认保存?', function() {
+			$.post(url, params, function(data){
+				OFLY.message(data.msg, function() {
+					if(data.code == 1) {
+						$('#resourcesForm').find('#datagrid').datagrid("reload");
+						OFLY.dialog.close("addResourceDialog");
+					}
+				});
 			});
 		});
 	}
@@ -103,6 +174,7 @@ var resources = (function(){
 	
 	_this.resourcesDblClick = resourcesDblClick;	// 双击资源
 	_this.queryList = queryList;					// 查询
+	_this.isMenuFormat = isMenuFormat;				// 格式化是否菜单项
 	_this.addResource = addResource;				// 新增
 	_this.editResource = editResource;				// 修改
 	_this.deleteResource = deleteResource;			// 删除

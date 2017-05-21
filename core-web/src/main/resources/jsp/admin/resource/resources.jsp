@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<jsp:include page="../../common/common.jsp"></jsp:include>
+<jsp:include page="../../../common/common.jsp"></jsp:include>
 <style type="text/css">
 .panel-header {
     border-top: none;
@@ -41,14 +41,15 @@
 				    <tr>
 				        <th data-options="field:'name'	,width:'20%',align:'left'">资源名称</th>
 				        <th data-options="field:'url'	,width:'60%',align:'left'">资源路径</th>
-				        <th data-options="field:'isMenu',width:'20%',align:'left'">是否菜单项</th>
+				        <th data-options="field:'isMenu',width:'10%',align:'center',formatter:resources.isMenuFormat">是否菜单项</th>
+				        <th data-options="field:'auth',width:'10%',align:'center',formatter:resources.isMenuFormat">是否权限项</th>
 				    </tr>
 				    </thead>
 				</table>
 				<div id="tb">
 					<div style="display: inline-block;margin-left: 10px;">
 						<span>查询条件:</span>
-						<input id="condition" placeholder="sdadsa|dsda|asad">
+						<input id="condition" placeholder="资源名称|资源路径">
 						<a id="queryBtn" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true,onClick:resources.queryList">查询</a>
 					</div>
 					<div style="display: inline-block;float: right;margin-right: 10px;">

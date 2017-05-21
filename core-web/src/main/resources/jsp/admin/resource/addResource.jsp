@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<jsp:include page="../../common/common.jsp"></jsp:include>
+<jsp:include page="../../../common/common.jsp"></jsp:include>
 <style type="text/css">
 </style>
 <title>新增功能资源</title>
@@ -13,7 +13,7 @@
 	<body>
 		<div style="margin: 5px 10px;">
 			<form id="addResourceForm" name="addResourceForm">
-				<input id="id" name="id" value="${vo.id }" >
+				<input id="id" name="id" value="${vo.id }" type="hidden">
 				<input id="parentId" name="parentId" value="${parentId }" type="hidden">
 				<table style="width: 100%">
 					<colgroup>
@@ -48,6 +48,14 @@
 							
 						</td>
 					</tr>
+					<tr>
+						<td align="right">是否配置成权限:</td>
+						<td colspan="3">
+							<input name="auth" type="radio" value="0" checked="checked">否
+							<input name="auth" type="radio" value="1">是
+							
+						</td>
+					</tr>
 				</table>
 			</form>
 		</div>
@@ -56,9 +64,13 @@
 				var id = '${vo.id}';
 				var name = '${vo.name}';
 				var url = '${vo.url}';
+				var isMenu = '${vo.isMenu}';
+				var auth = '${vo.auth}';
 				if(id!=null && id!='') {
 					$('#addResourceForm').find('#name').textbox('setValue',name);
 					$('#addResourceForm').find('#url').textbox('setValue', url);
+					$('#addResourceForm').find('#isMenu').val(isMenu);
+					$('#addResourceForm').find('#auth').val(auth);
 				}
 			});
 		</script>

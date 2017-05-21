@@ -16,7 +16,7 @@ import com.ofly.core.admin.vo.TreeNode;
 @Controller
 @RequestMapping("/tree")
 public class TreeController {
-	private static final String PATH_ADD_RESOURCES = "core/admin/addResources";
+	private static final String PATH_ADD_RESOURCES = "core/admin/resource/addResources";
 
 	@Autowired
 	private IResourcesService resourcesService;

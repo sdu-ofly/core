@@ -15,10 +15,10 @@ import com.ofly.core.admin.api.IResourcesService;
 import com.ofly.core.admin.vo.ResourceVo;
 
 @Controller
-@RequestMapping("/resources")
+@RequestMapping("/admin/resources")
 public class ResourcesController {
-	private static final String PATH_INIT = "core/admin/resources"; 
-	private static final String PATH_ADD_RESOURCE = "core/admin/addResource"; 
+	private static final String PATH_INIT = "core/admin/resource/resources"; 
+	private static final String PATH_ADD_RESOURCE = "core/admin/resource/addResource"; 
 	@Autowired
 	private IResourcesService resourcesService;
 	@RequestMapping("/init")
@@ -62,6 +62,13 @@ public class ResourcesController {
 	@ResponseBody
 	public Map<String, Object> saveResource(ResourceVo vo) {
 		Map<String, Object> result = resourcesService.saveResource(vo);
+		return result;
+	}
+	@RequestMapping("/deleteResource")
+	@ResponseBody
+	public Map<String, Object> deleteResource(String ids) {
+		List<String> arr = JSONObject.parseArray(ids, String.class);
+		Map<String, Object> result = resourcesService.deleteResource(arr);
 		return result;
 	}
 	

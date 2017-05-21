@@ -55,9 +55,9 @@ var admin = (function() {
 			}
 		})
 		if(!isTabExist) {// 不存在
-			var tabFunc = treeNode.id == 'ztree_resources'?'/resources/init':
-						  treeNode.id == 'ztree_roles'?'/roles/init':
-						  treeNode.id == 'ztree_account'?'/account/init':'';
+			var tabFunc = treeNode.id == 'ztree_resources'?'/admin/resources/init':
+						  treeNode.id == 'ztree_roles'?'/admin/roles/init':
+						  treeNode.id == 'ztree_account'?'/admin/account/init':'';
 			
 			$('#'+TABS_ID).tabs('add',{
 				id		: treeNode.id,

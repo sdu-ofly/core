@@ -7,12 +7,14 @@
 		<groupId>com.ofly</groupId>
 		<artifactId>core-parent</artifactId>
 		<version>1.0.0</version>
+		
 	</parent>
 	<artifactId>core-web</artifactId>
 	<name>core-web</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<shiro.version>1.3.2</shiro.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -21,6 +23,27 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-core</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-web</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-spring</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-ehcache</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.ofly</groupId>
 			<artifactId>core-api</artifactId>

@@ -7,6 +7,9 @@ var tree = (function() {
 	var _this = this;
 	var ctx = $('#ctx').val();
 	var _curResourcesNode = null;
+	var _resourcesTreeOptions = {};//资源树
+	var resourcesTreeId = '';
+	/*===========================================================*/
 	/**
 	 * @Author			: Logan
 	 * @Create Time		: 2017年5月11日 上午10:50:12
@@ -34,6 +37,10 @@ var tree = (function() {
 	 * @Introduction	: 初始化资源树
 	 */
 	var initResourcesTree = function(id,options) {
+		resourcesTreeId = id;
+		for(var name in options) {
+			_resourcesTreeOptions[name] = options[name];
+		}
 		//初始化右键菜单
 		_initRightMenus();
 		var setting = {
@@ -52,10 +59,32 @@ var tree = (function() {
 			};
 			$.fn.zTree.init($('#'+id), setting);
 	}
+	/*===========================================================*/
+	var _refreshResourcesTree = function() {
+		var setting = {
+				async	: {
+					enable		: true,
+					autoParam	: ['id'],
+					url			: ctx+'/tree/queryResources'
+				},
+				callback: {
+					onDblClick	: _resourcesTreeOptions.resourcesDblClick,
+					onRightClick: _resourcesRightMenus
+				},
+				view	: {
+					showLine	: false
+				}
+			};
+			$.fn.zTree.init($('#'+resourcesTreeId), setting);
+	}
 	var _refreshNode = function(id) {
 		var zTree = $.fn.zTree.getZTreeObj(id);
-		var parentNode = zTree.getNodeByTId(_curResourcesNode.parentTId);  
-		zTree.reAsyncChildNodes(parentNode, 'refresh');
+		if(_curResourcesNode==null) {
+			_refreshResourcesTree();
+		} else {
+			var parentNode = zTree.getNodeByTId(_curResourcesNode.parentTId);  
+			zTree.reAsyncChildNodes(parentNode, 'refresh');
+		}
 	}
 	
 	var _initRightMenus = function() {
@@ -85,8 +114,8 @@ var tree = (function() {
 	var _addResourcesNode = function(event) {
 		var url = ctx+"/tree/addResourcesNode";
 		var params = {
-			parentId	: _curResourcesNode.id,
-			parentName	: _curResourcesNode.name
+			parentId	: _curResourcesNode==null?"":_curResourcesNode.id,
+			parentName	: _curResourcesNode==null?"":_curResourcesNode.name
 		}
 		var buttons = [{
 			text	: '保存',
@@ -124,9 +153,12 @@ var tree = (function() {
 			};
 		} else {//新增
 			var params = {
-				parentId	: $('#resourceNodeForm').find("#parentId").val(),
 				name		: $('#resourceNodeForm').find('#name').textbox('getValue')
 			};
+			if($('#resourceNodeForm').find("#parentId").val()!="" &&
+			   $('#resourceNodeForm').find("#parentId").val()!=null) {
+				params['parentId'] = $('#resourceNodeForm').find("#parentId").val();
+			}
 		}
 		
 		OFLY.confirm("确认框","确认保存?",function() {
@@ -180,7 +212,7 @@ var tree = (function() {
 		}
 		return true;
 	}
-	
+	/*===========================================================*/
 	_this.initAdminNavigation = initAdminNavigation;
 	_this.initResourcesTree = initResourcesTree;
 	return _this;
