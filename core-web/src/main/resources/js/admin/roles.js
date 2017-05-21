@@ -110,9 +110,9 @@ var roles = (function() {
 		var url = ctx + '/admin/roles/queryResoueceWithRole';
 		var params = {
 			roleId : _curRole.id
-		}
+		};
 		var condition = $('#roleRelaCondition').textbox('getValue');
-		if(roleForm!=null && condition!="") {
+		if(condition!=null && condition!="") {
 			params['condition'] = condition
 		}
 		$('#relaResourceGrid').datagrid({
