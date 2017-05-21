@@ -32,17 +32,18 @@
 	</insert>
 	<insert id="saveResource" parameterType="com.ofly.core.admin.vo.ResourceVo">
 		INSERT INTO  sec_resources 
-			(parent_id, name, url,type,is_menu) 
+			(parent_id, name, url,type,is_menu,auth) 
 		VALUES 
-			(#{parentId}, #{name},#{url},'02',#{isMenu})
+			(#{parentId}, #{name},#{url},'02',#{isMenu},#{auth})
 	</insert>
 	<update id="updateResource" parameterType="com.ofly.core.admin.vo.ResourceVo">
 		UPDATE 
 			sec_resources 
 		SET 
-			name=#{name},
-			url =#{url},
-			is_Menu=#{isMenu}
+			name	= #{name},
+			url 	= #{url},
+			is_Menu	= #{isMenu},
+			auth	= #{auth}
 		WHERE 
 			id=#{id}
 	</update>
@@ -67,6 +68,15 @@
 			sec_resources
 		where 
 			id = #{id}
+	</delete>
+	<delete id="deleteResource">
+		delete from
+			sec_resources
+		where
+			id in 
+			<foreach collection="ids" open="(" close=")" separator="," item="item">
+				#{item}
+			</foreach>
 	</delete>
 	<select id="queryList" parameterType="map" resultType="com.ofly.core.admin.vo.ResourceVo">
 		SELECT 
@@ -101,4 +111,106 @@
 			url LIKE CONCAT('%', #{condition}, '%')
 		 )
 	</select>
+	<select id="queryExistResourceList" parameterType="map" resultType="com.ofly.core.admin.vo.RoleResRelaVo">
+		SELECT 
+		    b.*,
+		    c.role_res_rela_id
+		FROM
+		    sec_roles a,
+		    sec_resources b,
+		    sec_role_resource_rela c
+		WHERE
+		    a.id = c.role_id
+		AND b.id = c.resource_id
+		AND a.id=#{roleId}
+		<if test="condition!=null and condition!=''">
+		AND (
+			b.name LIKE CONCAT('%', #{condition}, '%')
+		OR 
+			b.url LIKE CONCAT('%', #{condition}, '%')
+		 )
+		</if>
+		<if test="rows!=null and offset!=null">
+        limit #{offset}, #{rows}
+        </if>
+	</select>
+	<select id="queryExistResourceListNum"  parameterType="map" resultType="int">
+		SELECT 
+		    count(1)
+		FROM
+		    sec_roles a,
+		    sec_resources b,
+		    sec_role_resource_rela c
+		WHERE
+		    a.id = c.role_id
+		AND b.id = c.resource_id
+		AND a.id=#{roleId}
+		<if test="condition!=null and condition!=''">
+		AND (
+			b.name LIKE CONCAT('%', #{condition}, '%')
+		OR 
+			b.url LIKE CONCAT('%', #{condition}, '%')
+		 )
+		</if>
+	</select>
+	<delete id="deleteRelaResource">
+		delete from
+			sec_role_resource_rela
+		where
+			role_res_rela_id in 
+			<foreach collection="ids" open="(" close=")" separator="," item="item">
+				#{item}
+			</foreach>
+	</delete>
+	<select id="queryUnUseResourceList" parameterType="map" resultType="com.ofly.core.admin.vo.ResourceVo">
+		SELECT 
+		    d.*
+		FROM
+		    sec_resources d
+		WHERE
+		    d.parent_id = #{parentId}
+		AND 
+			d.type = '02'
+        AND d.id NOT IN (SELECT 
+	            b.id
+	        FROM
+	            sec_roles a,
+	            sec_resources b,
+	            sec_role_resource_rela c
+	        WHERE
+	            a.id = #{roleId} 
+	        AND a.id = c.role_id
+	        AND b.id = c.resource_id)
+	   <if test="rows!=null and offset!=null">
+        limit #{offset}, #{rows}
+       </if>
+	</select>
+	<select id="queryUnUseResourceListNum" parameterType="map" resultType="int">
+		SELECT 
+		    count(1)
+		FROM
+		    sec_resources d
+		WHERE
+		    d.parent_id = #{parentId}
+		AND 
+			d.type = '02'
+        AND d.id NOT IN (SELECT 
+	            b.id
+	        FROM
+	            sec_roles a,
+	            sec_resources b,
+	            sec_role_resource_rela c
+	        WHERE
+	            a.id = #{roleId} 
+	        AND a.id = c.role_id
+	        AND b.id = c.resource_id)
+	</select>
+	<insert id="batchInsertRoleResRela">
+		insert into sec_role_resource_rela
+			(role_id, resource_id)
+		values
+		<foreach collection="arr" item="item" separator=",">
+			(#{item.roleId},#{item.resourceId})
+		</foreach>
+	</insert>
 </mapper>

@@ -6,7 +6,8 @@ public class ResourceVo {
 	private String name;		// 资源名称
 	private String url;			// 资源路径
 	private String type;		// 资源类型  01：文件夹 02：方法
-	private String isMenu;		// 是否可配置成菜单项
+	private String isMenu;		// 是否可配置成菜单项 0：否1：是
+	private String auth;		// 是否配置成权限0：否：1：是
 	public String getId() {
 		return id;
 	}
@@ -42,6 +43,12 @@ public class ResourceVo {
 	}
 	public void setIsMenu(String isMenu) {
 		this.isMenu = isMenu;
+	}
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
 	}
 	
 	

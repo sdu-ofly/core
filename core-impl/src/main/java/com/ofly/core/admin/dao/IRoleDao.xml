@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ofly.core.admin.dao.IRoleDao">
+	<insert id="insertRole">
+		INSERT INTO sec_roles 
+			( name, value) 
+		VALUES 
+			(#{name}, #{value})
+	</insert>
+	<update id="updateRole">
+		UPDATE 
+			sec_roles
+		SET 
+			name=#{name} 
+		WHERE 
+			id=#{id}
+	</update>
+	<select id="queryRoleList" parameterType="map" resultType="com.ofly.core.admin.vo.RoleVo">
+		SELECT 
+		    *
+		FROM
+		    sec_roles
+		<where>
+			<if test="condition!=null and condition!=''">
+				AND (
+					name LIKE CONCAT('%', #{condition}, '%') 
+				or 
+					value LIKE CONCAT('%', #{condition}, '%')
+					)
+			</if>
+		</where>
+		<if test="rows!=null and offset!=null">
+        limit #{offset}, #{rows}
+        </if>
+	</select>
+	<select id="queryRoleListNum" parameterType="map" resultType="int">
+		SELECT 
+		    count(1)
+		FROM
+		    sec_roles
+		<where>
+			<if test="condition!=null and condition!=''">
+				AND (name=#{name} or value=#{condition})
+			</if>
+		</where>
+	</select>
+	<select id="queryRoleByPrimarykey" resultType="com.ofly.core.admin.vo.RoleVo">
+		select * from sec_roles a where a.id= #{id}
+	</select>
+	<delete id="deleteRoleByPrimaryKey" >
+		DELETE FROM sec_roles WHERE id=#{id}
+	</delete>
+</mapper>
