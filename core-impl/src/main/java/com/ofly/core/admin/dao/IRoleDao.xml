@@ -50,4 +50,92 @@
 	<delete id="deleteRoleByPrimaryKey" >
 		DELETE FROM sec_roles WHERE id=#{id}
 	</delete>
+	<select id="queryRelaRoleList" parameterType="map" resultType="com.ofly.core.admin.vo.AccountRoleRelaVo">
+		SELECT 
+		    a.user_role_rela_id, b.*
+		FROM
+		    sec_user_role_rela a,
+		    sec_roles b
+		WHERE
+		    a.user_id = #{accountId}
+		AND 
+			a.role_id = b.id
+		<if test="condition!=null and condition!=''">
+		AND (
+			name LIKE CONCAT('%', #{condition}, '%') 
+		or 
+			value LIKE CONCAT('%', #{condition}, '%')
+			)
+		</if>
+		<if test="rows!=null and offset!=null">
+        limit #{offset}, #{rows}
+        </if>
+	</select>
+	<select id="queryRelaRoleListNum" parameterType="map" resultType="int">
+		SELECT 
+		    count(1)
+		FROM
+		    sec_user_role_rela a,
+		    sec_roles b
+		WHERE
+		    a.user_id = #{accountId}
+		AND 
+			a.role_id = b.id
+		<if test="condition!=null and condition!=''">
+		AND (
+			name LIKE CONCAT('%', #{condition}, '%') 
+		or 
+			value LIKE CONCAT('%', #{condition}, '%')
+			)
+		</if>
+	</select>
+	<select id="queryUnUseRoleList" parameterType="map" resultType="com.ofly.core.admin.vo.RoleVo">
+		SELECT 
+		    c.*
+		FROM
+		    sec_roles c
+		WHERE
+		    c.id NOT IN (SELECT 
+		            a.id
+		        FROM
+		            sec_roles a,
+		            sec_user_role_rela b
+		        WHERE
+		            a.id = b.role_id 
+		        AND 
+		        	b.user_id = #{accountId})
+		<if test="condition!=null and condition!=''">
+		AND (
+			c.name LIKE CONCAT('%', #{condition}, '%') 
+		or 
+			c.value LIKE CONCAT('%', #{condition}, '%')
+			)
+		</if>
+		<if test="rows!=null and offset!=null">
+        limit #{offset}, #{rows}
+        </if>
+	</select>
+	<select id="queryUnUseRoleListNum" parameterType="map" resultType="int">
+		SELECT 
+		    count(1)
+		FROM
+		    sec_roles c
+		WHERE
+		    c.id NOT IN (SELECT 
+		            a.id
+		        FROM
+		            sec_roles a,
+		            sec_user_role_rela b
+		        WHERE
+		            a.id = b.role_id 
+		        AND 
+		        	b.user_id = #{accountId})
+		<if test="condition!=null and condition!=''">
+		AND (
+			c.name LIKE CONCAT('%', #{condition}, '%') 
+		or 
+			c.value LIKE CONCAT('%', #{condition}, '%')
+			)
+		</if>
+	</select>
 </mapper>

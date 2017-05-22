@@ -72,7 +72,7 @@
 							<span>查询条件:</span>
 							<input id="accountRelaCondition" name="value" class="easyui-textbox" 
 											 data-options="prompt:'角色名称|角色编码'">
-							<a class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">查询</a>
+							<a class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true,onClick:account.queryRelaRole">查询</a>
 						</div>
 						<div style="display: inline-block;float: right;margin-right: 10px;">
 							<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">删除</a>
@@ -100,7 +100,10 @@
 			</table>
 			<div id="tb2">
 				<div style="display: inline-block;margin-left: 10px; height: 26px;">
-					&nbsp;
+					<span>查询条件:</span>
+					<input id="accountUnRelaCondition" name="value" class="easyui-textbox" 
+									 data-options="prompt:'角色名称|角色编码'">
+					<a class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true,onClick:account.queryUnUseRoleList">查询</a>
 				</div>
 				<div style="display: inline-block;float: right;margin-right: 10px;">
 					<a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>

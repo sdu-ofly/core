@@ -7,9 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.ofly.core.admin.api.IRoleService;
 import com.ofly.core.admin.dao.IRoleDao;
+import com.ofly.core.admin.vo.AccountRoleRelaVo;
 import com.ofly.core.admin.vo.RoleVo;
 @Service
 public class RoleService implements IRoleService {
@@ -96,6 +96,26 @@ public class RoleService implements IRoleService {
 		String msg = i==0?"删除失败":"删除成功";
 		result.put("msg", msg);
 		return result;
+	}
+	@Override
+	public List<AccountRoleRelaVo> queryRelaRoleList(Map<String, Object> params) {
+		List<AccountRoleRelaVo> list = dao.queryRelaRoleList(params);
+		return list;
+	}
+	@Override
+	public int queryRelaRoleListNum(Map<String, Object> params) {
+		int num = dao.queryRelaRoleListNum(params);
+		return num;
+	}
+	@Override
+	public List<RoleVo> queryUnUseRoleList(Map<String, Object> params) {
+		List<RoleVo> list = dao.queryUnUseRoleList(params);
+		return list;
+	}
+	@Override
+	public int queryUnUseRoleListNum(Map<String, Object> params) {
+		int num = dao.queryUnUseRoleListNum(params);
+		return num;
 	}
 
 }

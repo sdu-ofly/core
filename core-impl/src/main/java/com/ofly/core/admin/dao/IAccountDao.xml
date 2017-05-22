@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ofly.core.admin.dao.IAccountDao">
+	<select id="queryAccountList" parameterType="map" resultType="com.ofly.core.admin.vo.AccountVo">
+		select 
+			id,
+			name,
+			account 
+		from sec_user
+		<where>
+			<if test="condition!=null and condition!=''">
+				AND (
+					name LIKE CONCAT('%', #{condition}, '%') 
+				or 
+					account LIKE CONCAT('%', #{condition}, '%')
+					)
+			</if>
+		</where>
+		<if test="rows!=null and offset!=null">
+        limit #{offset}, #{rows}
+        </if>
+	</select>
+	<select id="queryAccountListNum" parameterType="map" resultType="int">
+		select 
+			count(1)
+		from sec_user
+		<where>
+			<if test="condition!=null and condition!=''">
+				AND (
+					name LIKE CONCAT('%', #{condition}, '%') 
+				or 
+					account LIKE CONCAT('%', #{condition}, '%')
+					)
+			</if>
+		</where>
+	</select>
+	<select id="queryAccountByPrimaryKey" resultType="com.ofly.core.admin.vo.AccountVo">
+		select 
+			id,
+			name,
+			account 
+		from 
+			sec_user
+		where
+			id = #{id} 
+	</select>
+	<delete id="deleteAccount">
+		DELETE FROM 
+			sec_user 
+		WHERE 
+			id=#{id}
+	</delete>
+	<insert id="insertAccount" parameterType="com.ofly.core.admin.vo.AccountVo">
+		INSERT INTO sec_user 
+			(name, password, salt, account) 
+		VALUES 
+			(#{name}, #{password}, #{salt}, #{account})
+		
+	</insert>
+	<update id="updateAccount" parameterType="com.ofly.core.admin.vo.AccountVo">
+		UPDATE 
+			sec_user
+		<set>
+			<if test="name!=null and name!=''">
+				name=#{name}, 
+			</if>
+			<if test="password!=null and password!=''">
+				password=#{password},
+			</if>
+			<if test="salt!=null and salt!=''">
+				salt=#{salt}
+			</if>
+		</set>
+		WHERE 
+			id=#{id}
+		
+	</update>
+</mapper>

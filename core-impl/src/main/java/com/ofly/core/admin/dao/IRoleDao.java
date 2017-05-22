@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import com.ofly.core.admin.vo.AccountRoleRelaVo;
 import com.ofly.core.admin.vo.RoleVo;
 
 /**
@@ -47,5 +48,29 @@ public interface IRoleDao {
 	 * 删除角色信息（根据ID）
 	 */
 	int deleteRoleByPrimaryKey(@Param("id")String id) throws MySQLIntegrityConstraintViolationException;
+	/**
+	 * @param params
+	 * @return
+	 * 查询关联角色（根据帐号ID）
+	 */
+	List<AccountRoleRelaVo> queryRelaRoleList(Map<String, Object> params);
+	/**
+	 * @param params
+	 * @return
+	 * 查询关联角色数量（根据帐号ID）
+	 */
+	int queryRelaRoleListNum(Map<String, Object> params);
+	/**
+	 * @param params
+	 * @return
+	 * 查询未分配的角色（根据帐号ID）
+	 */
+	List<RoleVo> queryUnUseRoleList(Map<String, Object> params);
+	/**
+	 * @param params
+	 * @return
+	 * 查询未分配角色数量(根据帐号ID)
+	 */
+	int queryUnUseRoleListNum(Map<String, Object> params);
 	
 }

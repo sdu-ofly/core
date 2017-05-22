@@ -8,6 +8,11 @@ var account = (function() {
 	var _curAccount = null;
 	var ctx = $('#ctx').val(); 
 	/*=============================================================*/
+	/**
+	 * @Author			: Logan
+	 * @Create Time		: 2017年5月22日 下午1:08:46
+	 * @Introduction	: 查询帐号列表
+	 */
 	var queryAccountList = function() {
 		$('#accountForm').find('#accountGrid').datagrid("load", {
 			condition	: $('#accountForm').find('#accountCondition').textbox("getValue")
@@ -51,6 +56,11 @@ var account = (function() {
 		}];
 		OFLY.dialog("addAccountDialog", url, params, "修改", _addDialogWidth, _addDialogHeight, buttons);
 	}
+	/**
+	 * @Author			: Logan
+	 * @Create Time		: 2017年5月22日 下午1:09:19
+	 * @Introduction	: 删除帐号
+	 */
 	var deleteAccount = function() {
 		if(!_deleteAccountValid()) {
 			return;
@@ -70,11 +80,21 @@ var account = (function() {
 			});
 		});
 	}
+	/**
+	 * @Author			: Logan
+	 * @Create Time		: 2017年5月22日 下午1:09:36
+	 * @Introduction	: 帐号列表单击事件
+	 */
 	var accountClick = function(index, row) {
 		_curAccount = row;
 		queryRelaRole();// 
-		_queryUnUseRoleList();
+		queryUnUseRoleList();
 	}
+	/**
+	 * @Author			: Logan
+	 * @Create Time		: 2017年5月22日 下午1:10:08
+	 * @Introduction	: 查询关联角色
+	 */
 	var queryRelaRole = function() {
 		if(!_queryRelaRoleValid()) {
 			return;
@@ -88,6 +108,28 @@ var account = (function() {
 			params['condition'] = condition
 		}
 		$('#accountForm').find('#relaRoleGrid').datagrid({
+			url			: url,
+			queryParams	: params
+		});
+	}
+	/**
+	 * @Author			: Logan
+	 * @Create Time		: 2017年5月22日 下午1:10:46
+	 * @Introduction	: 查询未管理角色
+	 */
+	var queryUnUseRoleList = function() {
+		if(!_queryRelaRoleValid()) {
+			return;
+		}
+		var url = ctx + '/admin/account/queryUnUseRoleList';
+		var params = {
+			accountId : _curAccount.id
+		};
+		var condition = $('#accountForm').find('#accountUnRelaCondition').textbox('getValue');
+		if(condition!=null && condition!="") {
+			params['condition'] = condition
+		}
+		$('#accountForm').find('#unUseRoleGrid').datagrid({
 			url			: url,
 			queryParams	: params
 		});
@@ -178,17 +220,16 @@ var account = (function() {
 	var _queryRelaRoleValid = function() {
 		return _selectedAccountValid();
 	}
-	var _queryUnUseRoleList = function() {
-		
-	}
 	/*=============================================================*/
 	/*=============================================================*/
 	/*=============================================================*/
 	
-	_this.queryAccountList = queryAccountList;	// 查询帐号列表
-	_this.addAccount = addAccount;				// 新增帐号
-	_this.editAccount = editAccount;			// 修改帐号
-	_this.deleteAccount = deleteAccount;		// 删除帐号
-	_this.accountClick = accountClick;			// 单击帐号
+	_this.queryAccountList = queryAccountList;		// 查询帐号列表
+	_this.addAccount = addAccount;					// 新增帐号
+	_this.editAccount = editAccount;				// 修改帐号
+	_this.deleteAccount = deleteAccount;			// 删除帐号
+	_this.accountClick = accountClick;				// 单击帐号
+	_this.queryRelaRole = queryRelaRole;			// 查询关联角色
+	_this.queryUnUseRoleList = queryUnUseRoleList;	// 查询未关联角色
 	return _this;
 })();

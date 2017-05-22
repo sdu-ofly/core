@@ -17,6 +17,7 @@ import com.ofly.core.admin.api.IAccountService;
 import com.ofly.core.admin.api.IRoleService;
 import com.ofly.core.admin.vo.AccountRoleRelaVo;
 import com.ofly.core.admin.vo.AccountVo;
+import com.ofly.core.admin.vo.RoleVo;
 
 @Controller
 @RequestMapping("/admin/account")
@@ -79,6 +80,22 @@ public class AccountController {
 		JSONObject result = new JSONObject();
 		List<AccountRoleRelaVo> list = roleService.queryRelaRoleList(params);
 		int num = roleService.queryRelaRoleListNum(params);
+		result.put("total", num);
+		result.put("rows", list);
+		return result;
+	}
+	
+	@RequestMapping("/queryUnUseRoleList")
+	@ResponseBody
+	public JSONObject queryUnUseRoleList(String accountId,String condition,Integer page, Integer rows) {
+		HashMap<String, Object> params=new HashMap<>();
+		params.put("accountId",accountId);
+		params.put("condition",condition);
+		params.put("rows", rows);
+		params.put("offset", (page-1)*rows);
+		JSONObject result = new JSONObject();
+		List<RoleVo> list = roleService.queryUnUseRoleList(params);
+		int num = roleService.queryUnUseRoleListNum(params);
 		result.put("total", num);
 		result.put("rows", list);
 		return result;
