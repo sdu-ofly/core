@@ -151,6 +151,11 @@ public class ResourcesService implements IResourcesService {
 		result.put("msg", msg);
 		return result;
 	}
+	@Override
+	public List<ResourceVo> queryAllResource() {
+		List<ResourceVo> list = dao.queryAllResource();
+		return list;
+	}
 	
 		
 }

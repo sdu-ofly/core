@@ -213,4 +213,7 @@
 			(#{item.roleId},#{item.resourceId})
 		</foreach>
 	</insert>
+	<select id="queryAllResource" resultType="com.ofly.core.admin.vo.ResourceVo">
+		select * from sec_resources where type = '02'
+	</select>
 </mapper>
