@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -99,6 +97,23 @@ public class AccountController {
 		result.put("total", num);
 		result.put("rows", list);
 		return result;
+	}
+	
+	@RequestMapping("/deleteRelaRole")
+	@ResponseBody
+	public Map<String, Object> deleteRelaRole(String ids) {
+		List<String> list = JSONObject.parseArray(ids, String.class);
+		Map<String, Object> result = roleService.deleteRelaRole(list);
+		return result;
+	}
+	@RequestMapping("/addReleRole")
+	@ResponseBody
+	public Map<String, Object> addReleRole(String data) {
+		@SuppressWarnings("rawtypes")
+		List<Map> list = JSONObject.parseArray(data, Map.class);
+		Map<String, Object> result = roleService.addReleRole(list);
+		return result;
+		
 	}
 	
 	

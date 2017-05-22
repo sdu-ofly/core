@@ -1,5 +1,7 @@
 /**
- * 
+ * @Author			: Logan
+ * @Create Time		: 2017年5月22日 下午7:59:43
+ * @Introduction	: 帐号管理
  */
 var account = (function() {
 	var _this = this;
@@ -134,6 +136,69 @@ var account = (function() {
 			queryParams	: params
 		});
 	}
+	/**
+	 * @Author			: Logan
+	 * @Create Time		: 2017年5月22日 下午8:01:02
+	 * @Introduction	: 删除管理角色
+	 */
+	var deleteRelaRole = function() {
+		if(!_deleteRelaRoleValid()){
+			return;
+		}
+		var url = ctx + '/admin/account/deleteRelaRole'
+		var arr = new Array();
+		var rows = $('#accountForm').find('#relaRoleGrid').datagrid("getSelections");
+		
+		$.each(rows, function(index, item) {
+			arr.push(item.userRoleRelaId);
+		});
+		var params = {
+			ids	: JSON.stringify(arr)
+		}
+		OFLY.confirm("提示", "确认删除?", function() {
+			$.post(url, params, function(data){
+				OFLY.message(data.msg, function(){
+					if(data.code == 1) {
+						$('#accountForm').find('#relaRoleGrid').datagrid("reload");
+						$('#accountForm').find('#unUseRoleGrid').datagrid("reload");
+					}
+				});
+			});
+		});
+	}
+	/**
+	 * @Author			: Logan
+	 * @Create Time		: 2017年5月22日 下午8:01:46
+	 * @Introduction	: 添加管理角色
+	 */
+	var addReleRole = function() {
+		if(!_addReleRoleValid()) {
+			return;
+		}
+		var url = ctx + '/admin/account/addReleRole'
+		var arr = new Array();
+		var accountId = _curAccount.id;
+		var rows = $('#accountForm').find('#unUseRoleGrid').datagrid("getSelections");
+		$.each(rows,function(index, item){
+			arr.push({
+				accountId	: accountId,
+				roleId		: item.id
+			});
+		});
+		var params = {
+			data	: JSON.stringify(arr)
+		}
+		OFLY.confirm("提示", "确认添加?", function(){
+			$.post(url, params, function(data) {
+				OFLY.message(data.msg, function(){
+					if(data.code == 1) {
+						$('#accountForm').find('#relaRoleGrid').datagrid("reload");
+						$('#accountForm').find('#unUseRoleGrid').datagrid("reload");
+					}
+				});
+			});
+		});
+	}
 	/*=============================================================*/
 	/**
 	 * @Author			: Logan
@@ -220,8 +285,30 @@ var account = (function() {
 	var _queryRelaRoleValid = function() {
 		return _selectedAccountValid();
 	}
-	/*=============================================================*/
-	/*=============================================================*/
+	var _deleteRelaRoleValid = function() {
+		var rows = $('#accountForm').find('#relaRoleGrid').datagrid("getSelections");
+		if(_curAccount == null) {
+			OFLY.message("请先选择要关联的帐号");
+			return false;
+		}
+		if(rows == null ||rows.length==0) {
+			OFLY.message("请先选择关联的角色");
+			return false;
+		}
+		return true;
+	}
+	var _addReleRoleValid = function() {
+		var rows = $('#accountForm').find('#unUseRoleGrid').datagrid("getSelections");
+		if(_curAccount == null) {
+			OFLY.message("请先选择要关联的帐号");
+			return false;
+		}
+		if(rows == null ||rows.length==0) {
+			OFLY.message("请先选择要分配的角色");
+			return false;
+		}
+		return true;
+	}
 	/*=============================================================*/
 	
 	_this.queryAccountList = queryAccountList;		// 查询帐号列表
@@ -231,5 +318,8 @@ var account = (function() {
 	_this.accountClick = accountClick;				// 单击帐号
 	_this.queryRelaRole = queryRelaRole;			// 查询关联角色
 	_this.queryUnUseRoleList = queryUnUseRoleList;	// 查询未关联角色
+	_this.deleteRelaRole = deleteRelaRole;			// 删除管理角色
+	_this.addReleRole = addReleRole;				// 添加管理角色
+	
 	return _this;
 })();

@@ -62,10 +62,10 @@
 										 toolbar		: '#tb1'">
 						<thead>
 					    <tr>
-					        <th data-options="field:'name'	,width:'20%',align:'left'">角色名称</th>
-					        <th data-options="field:'value'	,width:'60%',align:'left'">角色编码</th>
+					        <th data-options="field:'name'	,width:'50%',align:'left'">角色名称</th>
+					        <th data-options="field:'value'	,width:'50%',align:'left'">角色编码</th>
 					    </tr>
-					    </thead>
+					    </thead> 
 					</table>
 					<div id="tb1">
 						<div style="display: inline-block;margin-left: 10px;">
@@ -75,7 +75,7 @@
 							<a class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true,onClick:account.queryRelaRole">查询</a>
 						</div>
 						<div style="display: inline-block;float: right;margin-right: 10px;">
-							<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">删除</a>
+							<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true,onClick:account.deleteRelaRole">删除</a>
 						</div>
 					</div>
 				</div>
@@ -93,7 +93,7 @@
 								 toolbar		: '#tb2'">
 				<thead>
 			    <tr>
-			        <th data-options="field:'name'	,width:'20%',align:'left'">角色名称</th>
+			        <th data-options="field:'name'	,width:'50%',align:'left'">角色名称</th>
 			        <th data-options="field:'value'	,width:'50%',align:'left'">角色编码</th>
 			    </tr>
 			    </thead>
@@ -106,7 +106,7 @@
 					<a class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true,onClick:account.queryUnUseRoleList">查询</a>
 				</div>
 				<div style="display: inline-block;float: right;margin-right: 10px;">
-					<a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+					<a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,onClick:account.addReleRole">添加</a> 
 				</div>
 			</div>
 		</div>

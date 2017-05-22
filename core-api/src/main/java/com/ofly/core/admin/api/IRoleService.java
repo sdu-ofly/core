@@ -75,5 +75,13 @@ public interface IRoleService {
 	 * 查询未分配角色数量(根据帐号ID)
 	 */
 	int queryUnUseRoleListNum(Map<String, Object> params);
+	/**
+	 * @param ids
+	 * @return
+	 * 删除关联角色
+	 */
+	Map<String, Object> deleteRelaRole(List<String> ids);
+	Map<String, Object> addReleRole(@SuppressWarnings("rawtypes") List<Map> data);
+	
 
 }

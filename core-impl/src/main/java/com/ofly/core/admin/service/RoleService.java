@@ -117,5 +117,25 @@ public class RoleService implements IRoleService {
 		int num = dao.queryUnUseRoleListNum(params);
 		return num;
 	}
+	@Override
+	public Map<String, Object> deleteRelaRole(List<String> ids) {
+		Map<String, Object> result = new HashMap<>();
+		int i = dao.deleteRelaRole(ids);
+		String code = i==0?"0":"1";
+		String msg = i==0?"删除失败":"删除成功";
+		result.put("code", code);
+		result.put("msg", msg);
+		return result;
+	}
+	@Override
+	public Map<String, Object> addReleRole(@SuppressWarnings("rawtypes") List<Map> data) {
+		Map<String, Object> result = new HashMap<>();
+		int i = dao.batchInsertReleRole(data);
+		String code = i==0?"0":"1";
+		String msg = i==0?"添加失败":"添加成功";
+		result.put("code", code);
+		result.put("msg", msg);
+		return result;
+	}
 
 }

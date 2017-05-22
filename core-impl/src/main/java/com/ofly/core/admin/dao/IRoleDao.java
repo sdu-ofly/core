@@ -72,5 +72,17 @@ public interface IRoleDao {
 	 * 查询未分配角色数量(根据帐号ID)
 	 */
 	int queryUnUseRoleListNum(Map<String, Object> params);
+	/**
+	 * @param ids
+	 * @return
+	 * 删除关联角色
+	 */
+	int deleteRelaRole(@Param("ids")List<String> ids);
+	/**
+	 * @param data
+	 * @return
+	 * 新增管理角色
+	 */
+	int batchInsertReleRole(@SuppressWarnings("rawtypes") @Param("data")List<Map> data);
 	
 }

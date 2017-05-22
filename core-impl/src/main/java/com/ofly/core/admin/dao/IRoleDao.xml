@@ -138,4 +138,23 @@
 			)
 		</if>
 	</select>
+	<delete id="deleteRelaRole">
+		DELETE FROM 
+			sec_user_role_rela 
+		WHERE 
+		user_role_rela_id in
+		<foreach collection="ids" item="item" open="(" separator="," close=")" >
+			#{item}
+		</foreach>
+	</delete>
+	<insert id="batchInsertReleRole">
+		INSERT INTO sec_user_role_rela
+			 (user_id, role_id) 
+		VALUES 
+		<foreach collection="data" item="item" separator=",">
+			(#{item.accountId}, #{item.roleId})
+		</foreach>
+		
+
+	</insert>
 </mapper>
