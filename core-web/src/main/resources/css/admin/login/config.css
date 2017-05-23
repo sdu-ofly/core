@@ -1,0 +1,255 @@
+﻿body{font-size:12px;}
+
+#laout_jContainer1{
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+#laout_banner{
+  overflow:hidden;
+}
+
+#laout_jRegion2{
+  border:none;
+  overflow:hidden;
+}
+
+#laout_jRegion3{
+  border:none;
+  overflow:hidden;
+}
+
+#laout_nav{
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+#laout_nav .PanelBarCaption{
+}
+
+#laout_nav .PanelContent{
+}
+
+#laout_nav .cumicon{
+  background:url(../images/) no-repeat;
+  right: 0px;
+  bottom: 0px;
+  margin: 2px 5px 0 2px;
+}
+
+#laout_tabs{
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  position:absolute;
+}
+
+#laout_tree{
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  border-style:solid;
+  border-width:1pt;
+}
+
+#resources_jExtPanel1{
+  left: 0px;
+  top: 0px;
+  height:463px;
+  width:609px;
+}
+
+#resources_jExtPanel1 .PanelBarCaption{
+}
+
+#resources_jExtPanel1 .PanelContent{
+}
+
+#resources_jExtPanel1 .cumicon{
+  background:url(../images/) no-repeat;
+  width:16px;
+  height:16px;
+  margin: 2px 5px 0 2px;
+}
+
+#resources_jContainer1{
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+#resources_jRegion1{
+  border:none;
+  overflow:hidden;
+}
+
+#resources_jRegion2{
+  border:none;
+  overflow:hidden;
+}
+
+#resources_jDataGrid1{
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+#resources_jDataGrid1 .ui-widget-content{
+  border: none;
+}
+
+#resources_jToolbar1{
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  position:absolute;
+  background: url(../images/jToolsbarH.png) repeat-x;
+  border-left:none;
+  border-right:none;
+}
+
+#resources_jButton1{
+  left: 4px;
+  top: 3px;
+  width:56px;
+  height: 22px;
+}
+
+#resources_jButton2{
+  left: 70px;
+  top: 3px;
+  width:56px;
+  height: 22px;
+}
+
+#resources_jButton3{
+  left: 136px;
+  top: 3px;
+  width:56px;
+  height: 22px;
+}
+
+#resources_jButton4{
+  left: 222px;
+  top: 3px;
+  width:56px;
+  height: 22px;
+}
+
+#resources_jSeparator1{
+  left: 207px;
+  top: 5px;
+  height: 18px;
+  width: 8px;
+}
+
+#resources_jLabel1{
+  left: 317px;
+  top: 6px;
+  line-height: 18px;
+}
+
+#resources_jEdit1{
+  left: 370px;
+  top: 5px;
+  width:144px;
+  height:14px;
+}
+
+#resources_jButton5{
+  left: 526px;
+  top: 3px;
+  width:56px;
+  height: 22px;
+}
+
+#resources_jSeparator2{
+  left: 295px;
+  top: 6px;
+  height: 18px;
+  width: 8px;
+}
+
+#page5_jPanel1{
+  left: 0px;
+  top: 69px;
+  height: 430px;
+  right: 0px;
+}
+
+#page5_jPanel2{
+  top: 0px;
+  height: 400px;
+  width: 1006px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  background: url(../../../../img/core/login.png) no-repeat;
+}
+
+#page5_jHtmlForm1_form{
+  position:absolute;
+  left: 409px;
+  top: 174px;
+  width: 240px;
+  height: 120px;
+}
+
+#page5_jLabel1{
+  left: 4px;
+  top: 6px;
+  line-height: 18px;
+}
+
+#page5_jEdit1{
+  left: 57px;
+  top: 4px;
+  width:160px;
+  height:14px;
+}
+
+#page5_jLabel2{
+  left: 5px;
+  top: 37px;
+  line-height: 18px;
+}
+
+#page5_jEdit2{
+  left: 57px;
+  top: 35px;
+  width:161px;
+  height:14px;
+}
+
+#page5_jButton1{
+  left: 50px;
+  top: 74px;
+  width:79px;
+  height:20px;
+}
+
+#page5_jButton2{
+  left: 143px;
+  top: 74px;
+  width:79px;
+  height:20px;
+}
+
+#page5_jLabel3{
+  left: 315px;
+  top: 127px;
+  font-size: 24px;
+  font-family: "隶书";
+  color: #BD0000;
+  line-height: 31px;
+}
+
