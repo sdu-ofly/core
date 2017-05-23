@@ -14,7 +14,7 @@
 </head>
 <input id="ctx" value="<%=request.getContextPath()%>" type="hidden">
 <body class="easyui-layout" style="width:100%;height: 100%;">
-	<div data-options="region:'north'" style="height:120px;background: url(../img/admin/banner.jpg)">
+	<div data-options="region:'north'" style="height:120px;background: url(../img/core/banner.jpg)">
 	</div>
 	<div data-options="region:'west',split:true" title="导航" style="width:220px;">
 		<ul id="tree" class="ztree"></ul>
