@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
 	private static final String PATH_ADMIN 		= "core/admin/init";
-	private static final String PATH_RESOURCES 	= "core/admin/resources";
+/*	private static final String PATH_RESOURCES 	= "core/admin/resources";
 	private static final String PATH_ROLES 		= "core/admin/roles";
-	private static final String PATH_ACCOUNT 	= "core/admin/account";
+	private static final String PATH_ACCOUNT 	= "core/admin/account";*/
+	private static final String PATH_LOGIN 		= "core/admin/login";
 	@RequestMapping("/init")
 	public String init() {
 		return PATH_ADMIN;
 	}
-	@RequestMapping("/initResources")
+	/*@RequestMapping("/initResources")
 	public String initResources() {
 		return PATH_RESOURCES;
 	}
@@ -26,6 +27,10 @@ public class AdminController {
 	@RequestMapping("/initAccount")
 	public String initAccount() {
 		return PATH_ACCOUNT;
+	}*/
+	@RequestMapping("/login")
+	public String login(){
+		return PATH_LOGIN;
 	}
 	
 	
