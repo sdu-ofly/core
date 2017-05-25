@@ -51,8 +51,8 @@
 					<tr>
 						<td align="right">是否配置成权限:</td>
 						<td colspan="3">
-							<input name="auth" type="radio" value="0" checked="checked">否
-							<input name="auth" type="radio" value="1">是
+							<input name="auth" type="radio" value="0">否
+							<input name="auth" type="radio" value="1" checked="checked">是
 							
 						</td>
 					</tr>

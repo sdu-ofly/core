@@ -1,7 +1,8 @@
 D:\study\workbenchs\easyui\core-parent\core-web\src\main\java\com\ofly\core\admin\cotroller\AdminController.java
 D:\study\workbenchs\easyui\core-parent\core-web\src\main\java\com\ofly\core\auth\AuthenManager.java
+D:\study\workbenchs\easyui\core-parent\core-web\src\main\java\com\ofly\core\auth\Realm.java
 D:\study\workbenchs\easyui\core-parent\core-web\src\main\java\com\ofly\core\admin\cotroller\TreeController.java
-D:\study\workbenchs\easyui\core-parent\core-web\src\main\java\com\ofly\core\filter\WhiteFilter.java
 D:\study\workbenchs\easyui\core-parent\core-web\src\main\java\com\ofly\core\admin\cotroller\RolesController.java
 D:\study\workbenchs\easyui\core-parent\core-web\src\main\java\com\ofly\core\admin\cotroller\ResourcesController.java
 D:\study\workbenchs\easyui\core-parent\core-web\src\main\java\com\ofly\core\admin\cotroller\AccountController.java
+D:\study\workbenchs\easyui\core-parent\core-web\src\main\java\com\ofly\core\auth\controller\LoginController.java

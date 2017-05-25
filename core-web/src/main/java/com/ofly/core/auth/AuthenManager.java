@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ofly.core.admin.api.IResourcesService;
-import com.ofly.core.admin.vo.ResourceVo;
+import com.ofly.core.admin.vo.RoleResRelaVo;
 
 public class AuthenManager {
 	@Autowired
@@ -16,12 +16,13 @@ public class AuthenManager {
 	}
 	
 	private String getFilterChainDefinitions() {
+		
 		StringBuffer sb = new StringBuffer();
-		List<ResourceVo> list = resourcesService.queryAllResource();
+		List<RoleResRelaVo> list = resourcesService.queryAllResourceAndRoles();
 		if(list!=null && !list.isEmpty()) {
-			for (ResourceVo vo : list) {
+			for (RoleResRelaVo vo : list) {
 				if("1".equals(vo.getAuth())) {
-					sb.append(vo.getUrl()).append(" = ").append("authc").append(CRLF);
+					sb.append(vo.getUrl()).append(" = ").append("authc").append(",role["+vo.getRoleValues()+"]").append(CRLF);
 				} else {
 					sb.append(vo.getUrl()).append(" = ").append("anon").append(CRLF);
 				}
