@@ -24,5 +24,6 @@ public interface IResourcesService {
 	int queryUnUseResourceListNum(Map<String, Object> params);
 	Map<String, Object> addRelaResource(@SuppressWarnings("rawtypes")List<Map> params);
 	List<ResourceVo> queryAllResource();
+	List<RoleResRelaVo> queryAllResourceAndRoles();
 
 }

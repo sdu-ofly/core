@@ -82,6 +82,12 @@ public interface IRoleService {
 	 */
 	Map<String, Object> deleteRelaRole(List<String> ids);
 	Map<String, Object> addReleRole(@SuppressWarnings("rawtypes") List<Map> data);
+	/**
+	 * @param account
+	 * @return
+	 * 查询角色编码列表(根据帐号名称)
+	 */
+	List<String> queryRoleValuesByAccount(String account);
 	
 
 }

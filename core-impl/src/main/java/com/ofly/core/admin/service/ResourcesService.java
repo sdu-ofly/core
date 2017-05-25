@@ -156,6 +156,11 @@ public class ResourcesService implements IResourcesService {
 		List<ResourceVo> list = dao.queryAllResource();
 		return list;
 	}
+	@Override
+	public List<RoleResRelaVo> queryAllResourceAndRoles() {
+		List<RoleResRelaVo> list = dao.queryAllResourceAndRoles();
+		return list;
+	}
 	
 		
 }

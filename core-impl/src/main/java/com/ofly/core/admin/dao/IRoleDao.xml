@@ -154,7 +154,16 @@
 		<foreach collection="data" item="item" separator=",">
 			(#{item.accountId}, #{item.roleId})
 		</foreach>
-		
-
 	</insert>
+	<select id="queryRoleValuesByAccount" resultType="String">
+		SELECT 
+		    a.value
+		FROM
+		    sec_roles a,
+		    sec_user_role_rela b,
+		    sec_user c
+		WHERE
+		    a.id = b.role_id AND c.id = b.user_id
+		        AND c.account = #{account}
+	</select>
 </mapper>

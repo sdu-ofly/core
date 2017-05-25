@@ -35,4 +35,5 @@ public interface IResourcesDao {
 	int queryUnUseResourceListNum(Map<String, Object> params);
 	int batchInsertRoleResRela(@SuppressWarnings("rawtypes") @Param("arr")List<Map> params);
 	List<ResourceVo> queryAllResource();
+	List<RoleResRelaVo> queryAllResourceAndRoles();
 }

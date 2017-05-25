@@ -16,6 +16,7 @@ public interface IAccountDao {
 	List<AccountVo> queryAccountList(Map<String, Object> params);
 	int queryAccountListNum(Map<String, Object> params);
 	AccountVo queryAccountByPrimaryKey(@Param("id")String id);
+	AccountVo queryAccountByAccount(@Param("account")String account);
 	int deleteAccount(@Param("id")String id);
 	int insertAccount(AccountVo vo) throws DuplicateKeyException;
 	int updateAccount(AccountVo vo);

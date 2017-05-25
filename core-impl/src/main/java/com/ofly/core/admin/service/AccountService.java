@@ -94,6 +94,12 @@ public class AccountService implements IAccountService{
 		result.put("msg", msg);
 		return result;
 	}
+
+	@Override
+	public AccountVo queryAccountByAccount(String account) {
+		AccountVo vo = dao.queryAccountByAccount(account);
+		return vo;
+	}
 	
 
 }

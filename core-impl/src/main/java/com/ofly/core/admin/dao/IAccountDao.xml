@@ -44,6 +44,14 @@
 		where
 			id = #{id} 
 	</select>
+	<select id="queryAccountByAccount" resultType="com.ofly.core.admin.vo.AccountVo">
+		select 
+			* 
+		from 
+			sec_user
+		where
+			account = #{account} 
+	</select>
 	<delete id="deleteAccount">
 		DELETE FROM 
 			sec_user 

@@ -84,5 +84,11 @@ public interface IRoleDao {
 	 * 新增管理角色
 	 */
 	int batchInsertReleRole(@SuppressWarnings("rawtypes") @Param("data")List<Map> data);
+	/**
+	 * @param account
+	 * @return
+	 * 查询角色编码列表(根据帐号)
+	 */
+	List<String> queryRoleValuesByAccount(@Param("account")String account);
 	
 }

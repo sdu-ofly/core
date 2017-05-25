@@ -216,4 +216,20 @@
 	<select id="queryAllResource" resultType="com.ofly.core.admin.vo.ResourceVo">
 		select * from sec_resources where type = '02'
 	</select>
+	<select id="queryAllResourceAndRoles" resultType="com.ofly.core.admin.vo.RoleResRelaVo">
+		SELECT 
+		    c.*, GROUP_CONCAT(d.value) role_Values
+		FROM
+		    (SELECT 
+		        a.*, b.role_id
+		    FROM
+		        sec_resources a
+		    LEFT JOIN sec_role_resource_rela b ON a.id = b.resource_id
+		    WHERE
+		        a.type = '02') c,
+		    sec_roles d
+		WHERE
+		    c.role_id = d.id
+		GROUP BY c.id
+	</select>
 </mapper>

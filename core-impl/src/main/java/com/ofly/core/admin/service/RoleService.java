@@ -137,5 +137,10 @@ public class RoleService implements IRoleService {
 		result.put("msg", msg);
 		return result;
 	}
+	@Override
+	public List<String> queryRoleValuesByAccount(String account) {
+		List<String> list = dao.queryRoleValuesByAccount(account);
+		return list;
+	}
 
 }

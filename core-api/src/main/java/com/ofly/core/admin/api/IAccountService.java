@@ -9,6 +9,7 @@ public interface IAccountService {
 	List<AccountVo> queryAccountList(Map<String, Object> params);
 	int queryAccountListNum(Map<String, Object> params);
 	AccountVo queryAccountByPrimaryKey(String id);
+	AccountVo queryAccountByAccount(String account);
 	Map<String, Object> deleteAccount(String id);
 	Map<String, Object> saveAccount(AccountVo vo);
 
