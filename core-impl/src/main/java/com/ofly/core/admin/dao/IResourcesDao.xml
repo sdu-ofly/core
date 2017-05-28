@@ -221,15 +221,14 @@
 		    c.*, GROUP_CONCAT(d.value) role_Values
 		FROM
 		    (SELECT 
-		        a.*, b.role_id
+		        a.*, b.role_id, b.role_res_rela_id
 		    FROM
 		        sec_resources a
 		    LEFT JOIN sec_role_resource_rela b ON a.id = b.resource_id
 		    WHERE
-		        a.type = '02') c,
-		    sec_roles d
-		WHERE
-		    c.role_id = d.id
+		        a.type = '02') c
+		        LEFT JOIN
+		    sec_roles d ON c.role_id = d.id
 		GROUP BY c.id
 	</select>
 </mapper>

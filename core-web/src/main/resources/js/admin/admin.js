@@ -70,9 +70,17 @@ var admin = (function() {
 			$('#'+TABS_ID).tabs("select", curTabIndex);
 		}
 	}
+	var refresh = function() {
+		var url = ctx + '/admin/refresh';
+		var params = {};
+		$.post(url, params, function(data){
+			OFLY.message(data.msg);
+		});
+	}
 	
 	_this.init = init;	// 初始化Admin
 	_this.treeDblClick = treeDblClick;	// 初始化Admin
+	_this.refresh = refresh;	// 刷新权限
 	return _this;
 })();
 

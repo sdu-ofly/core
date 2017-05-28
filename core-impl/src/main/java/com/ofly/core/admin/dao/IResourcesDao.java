@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.ofly.core.admin.vo.ResourceVo;
 import com.ofly.core.admin.vo.RoleResRelaVo;
 import com.ofly.core.admin.vo.TreeNode;
@@ -27,7 +26,7 @@ public interface IResourcesDao {
 	int queryListNum(Map<String, Object> params);
 	int saveResource(ResourceVo vo);
 	int updateResource(ResourceVo vo);
-	int deleteResource(@Param("ids")List<String> ids) throws MySQLIntegrityConstraintViolationException;
+	int deleteResource(@Param("ids")List<String> ids);
 	List<RoleResRelaVo> queryExistResourceList(Map<String, Object> params) ;
 	int queryExistResourceListNum(Map<String, Object> params) ;
 	int deleteRelaResource(@Param("ids")List<String> ids);
