@@ -5,8 +5,6 @@ import java.util.Map;
 
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
-import org.apache.shiro.web.filter.mgt.FilterChainManager;
-import org.apache.shiro.web.filter.mgt.FilterChainResolver;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
 import org.apache.shiro.web.servlet.AbstractShiroFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,12 @@ import org.springframework.web.context.WebApplicationContext;
 import com.ofly.core.admin.api.IResourcesService;
 import com.ofly.core.admin.vo.RoleResRelaVo;
 
+/**
+ * Author		：Logan715                
+ * Create Date	：2017年6月4日 下午6:19:15
+ *
+ * Introduction	：权限管理
+ */
 public class AuthenManager {
 	@Autowired
 	private IResourcesService resourcesService;
@@ -25,6 +29,16 @@ public class AuthenManager {
 	@Qualifier("shiroFilter")
 	private ShiroFilterFactoryBean shiroFilter;
 	private static AuthenManager instance;
+	
+	/**
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 下午6:21:18
+	 * History		: 2017年6月4日 下午6:21:18   Logan715   Created.
+	
+	 * Introduction	：获取权限管理实例
+	 * @return		: AuthenManager
+	 *
+	 */
 	public static AuthenManager getInstance(){
 		if(instance==null) {
 			synchronized (AuthenManager.class) {
@@ -35,10 +49,16 @@ public class AuthenManager {
 		}
 		return instance;
 	}
+	
 	/**
-	 * @author Logan
-	 * 重新加载权限角色资源信息
-	 * @throws Exception 
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 下午6:21:58
+	 * History		: 2017年6月4日 下午6:21:58   Logan715   Created.
+	
+	 * Introduction	：重新加载权限角色资源信息
+	 * @return
+	 * @throws Exception		: 
+	 *
 	 */
 	public boolean reloadFilterChainDefinitions() throws Exception {
 		/*=============================================================
@@ -53,36 +73,42 @@ public class AuthenManager {
 			shiroFilter = (ShiroFilterFactoryBean)wac.getBean(ShiroFilterFactoryBean.class);
 		}
 		AbstractShiroFilter shiro = (AbstractShiroFilter)shiroFilter.getObject();
-		//Map<String, String> map = shiroFilter.getFilterChainDefinitionMap();
-		//shiroFilter.setFilterChainDefinitions(this.getFilterChainDefinitions());
-		//System.out.println(shiroFilter.getFilterChainDefinitionMap().toString());
 		PathMatchingFilterChainResolver pathMatchingFilterChainResolver = (PathMatchingFilterChainResolver)shiro.getFilterChainResolver();
 		DefaultFilterChainManager filterChainManager = (DefaultFilterChainManager)pathMatchingFilterChainResolver.getFilterChainManager();
-		//
 		filterChainManager.getFilterChains().clear();
 		shiroFilter.getFilterChainDefinitionMap().clear();
-		//
 		shiroFilter.setFilterChainDefinitions(this.getFilterChainDefinitions());
-		
 		Map<String, String> chains = shiroFilter.getFilterChainDefinitionMap();  
-		  
         for (Map.Entry<String, String> entry : chains.entrySet()) {  
             String url = entry.getKey();  
             String chainDefinition = entry.getValue().trim().replace(" ", "");  
             filterChainManager.createChain(url, chainDefinition);
         } 
-		
-		
-		
-		
 		return true;
 	}
+	
+	/**
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 下午6:24:12
+	 * History		: 2017年6月4日 下午6:24:12   Logan715   Created.
+	
+	 * Introduction	：加载权限过滤器
+	 * @return		: shiro 权限字符串
+	 *
+	 */
 	public String loadFilterChainDefinitions() {
 		return getFilterChainDefinitions();
 	}
 	
+	/**
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 下午6:25:00
+	 * History		: 2017年6月4日 下午6:25:00   Logan715   Created.
 	
-	
+	 * Introduction	：获取权限字符串
+	 * @return		: 返回权限字符串
+	 *
+	 */
 	private String getFilterChainDefinitions() {
 		
 		if(resourcesService==null) {

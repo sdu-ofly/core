@@ -62,8 +62,9 @@
 										 toolbar		: '#tb1'">
 						<thead>
 					    <tr>
+					    	<th data-options="field:'ck'	,width:'5%',checkbox:true"></th>
 					        <th data-options="field:'name'	,width:'50%',align:'left'">角色名称</th>
-					        <th data-options="field:'value'	,width:'50%',align:'left'">角色编码</th>
+					        <th data-options="field:'value'	,width:'45%',align:'left'">角色编码</th>
 					    </tr>
 					    </thead> 
 					</table>
@@ -93,8 +94,9 @@
 								 toolbar		: '#tb2'">
 				<thead>
 			    <tr>
+			    	<th data-options="field:'ck'	,width:'5%',checkbox:true"></th>
 			        <th data-options="field:'name'	,width:'50%',align:'left'">角色名称</th>
-			        <th data-options="field:'value'	,width:'50%',align:'left'">角色编码</th>
+			        <th data-options="field:'value'	,width:'45%',align:'left'">角色编码</th>
 			    </tr>
 			    </thead>
 			</table>

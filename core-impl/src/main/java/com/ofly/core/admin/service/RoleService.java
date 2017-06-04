@@ -11,14 +11,31 @@ import com.ofly.core.admin.api.IRoleService;
 import com.ofly.core.admin.dao.IRoleDao;
 import com.ofly.core.admin.vo.AccountRoleRelaVo;
 import com.ofly.core.admin.vo.RoleVo;
+/**
+ * Introduction	：角色管理Service
+ *
+ * Author		：Logan715                
+ * Create Date	：2017年6月4日 上午10:57:59
+ *
+ */
 @Service
 public class RoleService implements IRoleService {
 	@Autowired
 	private IRoleDao dao;
 	/**
-	 * @param vo
-	 * @return
-	 * 保存角色信息
+	 * Introduction	：保存角色信息
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:58:14
+	 * History		: 2017年6月4日 上午10:58:14   Logan715   Created.
+	 * 
+	 * @param vo	: 角色数据
+	 * @return		: 	 
+	 * {
+	 * 		code	: 成功失败标识[成功:1;失败：0]
+	 * 		msg		: 提示信息
+	 * }
+	 *
 	 */
 	@Override
 	public Map<String, Object> saveRole(RoleVo vo) {
@@ -39,16 +56,21 @@ public class RoleService implements IRoleService {
 		return result;
 	}
 	/**
-	 * @param params ：[
-	 * 		'condition'	: 查询条件 【角色名称|角色编码】
-	 * 		'rows'		: 一页行数
-	 * 		'offset'	: 从第几行开始查询
-	 * 		(后2个用于分页)
-	 * ]
-	 * @return
-	 * 查询角色列表
-	 * 	params 
+	 * Introduction	：查询角色列表
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:59:02
+	 * History		: 2017年6月4日 上午10:59:02   Logan715   Created.
 	 * 
+	 * @param params: 
+	 * {
+	 * 		condition	: (角色名称|角色编码)可模糊查询
+	 * 		rows		: 一页行数
+	 * 		offset		: 从第几行开始查询
+	 * 		(后2个用于分页)
+	 * }
+	 * @return		: List<RoleVo>
+	 *
 	 */
 	@Override
 	public List<RoleVo> queryRoleList(Map<String, Object> params) {
@@ -56,20 +78,33 @@ public class RoleService implements IRoleService {
 		return list;
 	}
 	/**
-	 * @param params ：[
-	 * 		'condition'	: 查询条件 【角色名称|角色编码】
-	 * ]
-	 * @return
-	 * 查询角色列表总数量
+	 * Introduction	：查询角色列表总数量
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午11:00:37
+	 * History		: 2017年6月4日 上午11:00:37   Logan715   Created.
+	 * 
+	 * @param params: 
+	 * {
+	 * 		condition	: (角色名称|角色编码)可模糊查询
+	 * }
+	 * @return			: 数量
+	 *
 	 */
 	public int queryRoleListNum(Map<String, Object> params) {
 		int num = dao.queryRoleListNum(params);
 		return num;
 	}
 	/**
-	 * @param id
-	 * @return
-	 * 查询角色信息（根据id）
+	 * Introduction	：根据主键查询角色
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午11:01:17
+	 * History		: 2017年6月4日 上午11:01:17   Logan715   Created.
+	 * 
+	 * @param id	: 角色Id
+	 * @return		: RoleVo
+	 *
 	 */
 	@Override
 	public RoleVo queryRoleByPrimarykey(String id) {
@@ -77,9 +112,19 @@ public class RoleService implements IRoleService {
 		return vo;
 	}
 	/**
-	 * @param id
-	 * @return
-	 * 删除角色信息(根据ID)
+	 * Introduction	：根据主键删除角色
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午11:01:55
+	 * History		: 2017年6月4日 上午11:01:55   Logan715   Created.
+	 * 
+	 * @param id	: 角色Id
+	 * @return		: 
+	 * {
+	 * 		code	: 成功失败标识[成功:1;失败：0]
+	 * 		msg		: 提示信息
+	 * }
+	 *
 	 */
 	@Override
 	public Map<String, Object> deleteRoleByPrimaryKey(String id) {
@@ -97,26 +142,105 @@ public class RoleService implements IRoleService {
 		result.put("msg", msg);
 		return result;
 	}
+	/**
+	 * Introduction	：查询帐号管理的角色信息List
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午11:03:01
+	 * History		: 2017年6月4日 上午11:03:01   Logan715   Created.
+	 * 
+	 * @param params: 
+	 * {
+	 * 		accountId	: 帐号Id
+	 * 		condition	: (角色名称|角色编码)可模糊查询
+	 * 		rows		: 显示行数
+	 * 		offset		: 偏移量(从第几条数据开始查询起)
+	 * }
+	 * @return			: List<AccountRoleRelaVo>
+	 *
+	 */
 	@Override
 	public List<AccountRoleRelaVo> queryRelaRoleList(Map<String, Object> params) {
 		List<AccountRoleRelaVo> list = dao.queryRelaRoleList(params);
 		return list;
 	}
+	/**
+	 * Introduction	：查询帐号管理的角色信息数量
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午11:03:01
+	 * History		: 2017年6月4日 上午11:03:01   Logan715   Created.
+	 * 
+	 * @param params: 
+	 * {
+	 * 		accountId	: 帐号Id
+	 * 		condition	: (角色名称|角色编码)可模糊查询
+	 * }
+	 * @return			: 数量
+	 *
+	 */
 	@Override
 	public int queryRelaRoleListNum(Map<String, Object> params) {
 		int num = dao.queryRelaRoleListNum(params);
 		return num;
 	}
+	/**
+	 * Introduction	：查询帐号未被使用的角色List
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 下午12:45:43
+	 * History		: 2017年6月4日 下午12:45:43   Logan715   Created.
+	 * 
+	 * @param params：
+	 * {
+	 * 		accountId	: 帐号Id
+	 * 		condition	: (角色名称|角色编码)可模糊查询
+	 * 		rows		: 显示行数
+	 * 		offset		: 偏移了(从第几条数据查询起)
+	 * }
+	 * @return		: List<RoleVo>
+	 *
+	 */
 	@Override
 	public List<RoleVo> queryUnUseRoleList(Map<String, Object> params) {
 		List<RoleVo> list = dao.queryUnUseRoleList(params);
 		return list;
 	}
+	/**
+	 * Introduction	：查询帐号未被使用的角色List
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 下午12:45:43
+	 * History		: 2017年6月4日 下午12:45:43   Logan715   Created.
+	 * 
+	 * @param params：
+	 * {
+	 * 		accountId	: 帐号Id
+	 * 		condition	: (角色名称|角色编码)可模糊查询
+	 * }
+	 * @return		: List<RoleVo>
+	 *
+	 */
 	@Override
 	public int queryUnUseRoleListNum(Map<String, Object> params) {
 		int num = dao.queryUnUseRoleListNum(params);
 		return num;
 	}
+	/**
+	 * Introduction	：删除帐号关联的角色
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 下午12:49:32
+	 * History		: 2017年6月4日 下午12:49:32   Logan715   Created.
+	 * 
+	 * @param ids	:关联角色List
+	 * @return		: 
+	 * {
+	 * 		code	: 成功失败标识(成功:1;失败:0)
+	 * 		msg		: 提示信息
+	 * }
+	 *
+	 */
 	@Override
 	public Map<String, Object> deleteRelaRole(List<String> ids) {
 		Map<String, Object> result = new HashMap<>();
@@ -127,6 +251,21 @@ public class RoleService implements IRoleService {
 		result.put("msg", msg);
 		return result;
 	}
+	/**
+	 * Introduction	：新增管理角色
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 下午12:51:02
+	 * History		: 2017年6月4日 下午12:51:02   Logan715   Created.
+	 * 
+	 * @param data	: 管理角色信息List
+	 * @return		: 
+	 * {
+	 * 		code	: 成功失败标识(成功:1;失败:0)
+	 * 		msg		: 提示信息
+	 * }
+	 *
+	 */
 	@Override
 	public Map<String, Object> addReleRole(@SuppressWarnings("rawtypes") List<Map> data) {
 		Map<String, Object> result = new HashMap<>();
@@ -137,6 +276,17 @@ public class RoleService implements IRoleService {
 		result.put("msg", msg);
 		return result;
 	}
+	/**
+	 * Introduction	：查询帐号管理的角色编码
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 下午12:51:53
+	 * History		: 2017年6月4日 下午12:51:53   Logan715   Created.
+	 * 
+	 * @param account	: 帐号名称
+	 * @return			: List<String> --> 角色编码List
+	 *
+	 */
 	@Override
 	public List<String> queryRoleValuesByAccount(String account) {
 		List<String> list = dao.queryRoleValuesByAccount(account);

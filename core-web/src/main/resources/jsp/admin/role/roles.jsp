@@ -60,8 +60,9 @@
 										 toolbar		: '#tb1'">
 						<thead>
 					    <tr>
+					    	<th data-options="field:'ck'	,width:'5%',checkbox:true"></th>
 					        <th data-options="field:'name'	,width:'20%',align:'left'">资源名称</th>
-					        <th data-options="field:'url'	,width:'60%',align:'left'">资源路径</th>
+					        <th data-options="field:'url'	,width:'55%',align:'left'">资源路径</th>
 					        <th data-options="field:'isMenu',width:'10%',align:'center',formatter:roles.isFlagFormat">菜单项</th>
 					        <th data-options="field:'auth',width:'10%',align:'center',formatter:roles.isFlagFormat">权限项</th>
 					    </tr>
@@ -99,8 +100,9 @@
 										 toolbar		: '#tb2'">
 						<thead>
 					    <tr>
+					    	<th data-options="field:'ck'	,width:'5%',checkbox:true"></th>
 					        <th data-options="field:'name'	,width:'20%',align:'left'">资源名称</th>
-					        <th data-options="field:'url'	,width:'50%',align:'left'">资源路径</th>
+					        <th data-options="field:'url'	,width:'45%',align:'left'">资源路径</th>
 					        <th data-options="field:'isMenu',width:'15%',align:'center',formatter:roles.isFlagFormat">菜单项</th>
 					        <th data-options="field:'auth',width:'15%',align:'center',formatter:roles.isFlagFormat">权限项</th>
 					    </tr>

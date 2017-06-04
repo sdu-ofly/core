@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: core-web
 Implementation-Version: 1.0.0
-Built-By: Logan
+Built-By: Logan715
 Implementation-Vendor-Id: com.ofly
 Build-Jdk: 1.8.0_121
 Implementation-URL: http://maven.apache.org

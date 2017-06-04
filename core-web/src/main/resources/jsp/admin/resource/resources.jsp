@@ -39,8 +39,9 @@
 									 toolbar		: '#tb'">
 					<thead>
 				    <tr>
+				        <th data-options="field:'ck'	,width:'5%',checkbox:true"></th>
 				        <th data-options="field:'name'	,width:'20%',align:'left'">资源名称</th>
-				        <th data-options="field:'url'	,width:'60%',align:'left'">资源路径</th>
+				        <th data-options="field:'url'	,width:'55%',align:'left'">资源路径</th>
 				        <th data-options="field:'isMenu',width:'10%',align:'center',formatter:resources.isMenuFormat">是否菜单项</th>
 				        <th data-options="field:'auth',width:'10%',align:'center',formatter:resources.isMenuFormat">是否权限项</th>
 				    </tr>

@@ -20,6 +20,13 @@ import com.ofly.core.admin.api.IRoleService;
 import com.ofly.core.admin.vo.ResourceVo;
 import com.ofly.core.admin.vo.RoleResRelaVo;
 import com.ofly.core.admin.vo.RoleVo;
+/**
+ * Introduction	：角色管理
+ *
+ * Author		：Logan715                
+ * Create Date	：2017年6月4日 上午10:03:57
+ *
+ */
 @Controller
 @RequestMapping("/admin/roles")
 public class RolesController {
@@ -31,17 +38,30 @@ public class RolesController {
 	@Autowired
 	private IResourcesService resourcesService;
 	/**
-	 * @return
-	 * 初始化角色管理界面
+	 * Introduction	：初始化角色管理界面
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:04:21
+	 * History		: 2017年6月4日 上午10:04:21   Logan715   Created.
+	 * 
+	 * @return		: 地址
+	 *
 	 */
 	@RequestMapping("/init")
 	public String init() {
 		return PATH_INIT;
 	}
 	
+	
 	/**
-	 * @return
-	 * 新增角色界面
+	 * Introduction	：新增角色界面
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:04:37
+	 * History		: 2017年6月4日 上午10:04:37   Logan715   Created.
+	 * 
+	 * @return		: 地址
+	 *
 	 */
 	@RequestMapping("/addRole")
 	public String addRole() {
@@ -49,9 +69,16 @@ public class RolesController {
 	}
 	
 	/**
-	 * @param m		：数据绑定对象
-	 * @param id	: 角色ID
-	 * @return
+	 * Introduction	：初始化编辑角色
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:04:50
+	 * History		: 2017年6月4日 上午10:04:50   Logan715   Created.
+	 * 
+	 * @param m		: Model
+	 * @param id	: 角色Id
+	 * @return		: 地址
+	 *
 	 */
 	@RequestMapping("/editRole")
 	public String editRole(Model m, String id) {
@@ -60,6 +87,19 @@ public class RolesController {
 		return PATH_ADD_ROLE;
 	}
 	
+	/**
+	 * Introduction	：查询角色List
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:05:38
+	 * History		: 2017年6月4日 上午10:05:38   Logan715   Created.
+	 * 
+	 * @param condition	: (角色名称|角色编码)可模糊查询
+	 * @param page		: 页数
+	 * @param rows		: 显示行数
+	 * @return			: 角色List的Json数据
+	 *
+	 */
 	@RequestMapping("/queryRoleList")
 	@ResponseBody
 	public JSONObject queryRoleList(String condition,Integer page, Integer rows) {
@@ -76,9 +116,19 @@ public class RolesController {
 	}
 	
 	/**
+	 * Introduction	：保存对应的角色数据
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:09:15
+	 * History		: 2017年6月4日 上午10:09:15   Logan715   Created.
+	 * 
 	 * @param vo	: 角色数据
-	 * @return
-	 * 保存对应的角色数据
+	 * @return		: 
+	 * {
+	 * 		code	: 成功失败标识[成功:1;失败：0]
+	 * 		msg		: 提示信息
+	 * }
+	 *
 	 */
 	@RequestMapping("/saveRole")
 	@ResponseBody
@@ -88,9 +138,18 @@ public class RolesController {
 	}
 	
 	/**
-	 * @param id	：角色ID
-	 * @return
-	 * 删除角色信息(根据ID)
+	 * Introduction	：删除角色信息
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:09:56
+	 * History		: 2017年6月4日 上午10:09:56   Logan715   Created.
+	 * 
+	 * @param id	: 角色Id
+	 * @return		:
+	 * {
+	 * 		code	: 成功失败标识[成功:1;失败：0]
+	 * 		msg		: 提示信息
+	 * }
 	 */
 	@RequestMapping("/deleteRole")
 	@ResponseBody
@@ -104,7 +163,25 @@ public class RolesController {
 	 * @param page
 	 * @param rows
 	 * @return
-	 * 查询角色管理的资源信息
+	 * 
+	 */
+	/**
+	 * Introduction	：查询角色管理的资源信息
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:10:41
+	 * History		: 2017年6月4日 上午10:10:41   Logan715   Created.
+	 * 
+	 * @param roleId	: 角色Id
+	 * @param condition	: (资源名称|资源路径)可模糊查询
+	 * @param page		: 页数
+	 * @param rows		: 显示行数
+	 * @return			: Json数据 
+	 * {
+	 * 		total	: 总数
+	 * 		rows	: 查询角色管理的资源信息List
+	 * }
+	 *
 	 */
 	@RequestMapping("/queryResoueceWithRole")
 	@ResponseBody JSONObject queryResoueceWithRole(String roleId, String condition,Integer page, Integer rows) {
@@ -120,6 +197,20 @@ public class RolesController {
 		result.put("rows", list);
 		return result;
 	}
+	/**
+	 * Introduction	：删除角色管理的资源
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:13:18
+	 * History		: 2017年6月4日 上午10:13:18   Logan715   Created.
+	 * 
+	 * @param ids	: 关联资源Id数组的Json字符串
+	 * @return		: 
+	 * {
+	 * 		code	: 成功失败标识[成功:1;失败：0]
+	 * 		msg		: 提示信息
+	 * }
+	 */
 	@RequestMapping("/deleteRelaResource")
 	@ResponseBody
 	public Map<String, Object> deleteRelaResource(String ids) {
@@ -127,6 +218,24 @@ public class RolesController {
 		Map<String, Object> result = resourcesService.deleteRelaResource(arr);
 		return result;
 	}
+	/**
+	 * Introduction	：查询角色未关联的资源信息List
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:14:46
+	 * History		: 2017年6月4日 上午10:14:46   Logan715   Created.
+	 * 
+	 * @param roleId	: 角色Id
+	 * @param parentId	: 父节点Id
+	 * @param page		: 页数
+	 * @param rows		: 显示行数
+	 * @return			: Json数据
+	 * {
+	 * 		total	: 总数
+	 * 		rows	: 查询角色未关联的资源信息List
+	 * }
+	 *
+	 */
 	@RequestMapping("/queryUnUseResourceList")
 	@ResponseBody
 	public JSONObject queryUnUseResourceList(String roleId,String parentId
@@ -143,6 +252,20 @@ public class RolesController {
 		result.put("rows", list);
 		return result;
 	}
+	/**
+	 * Introduction	：新增角色管理资源
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:16:40
+	 * History		: 2017年6月4日 上午10:16:40   Logan715   Created.
+	 * 
+	 * @param data	: 关联资源数据数组的json字符串
+	 * @return		: 
+	 * {
+	 * 		code	: 成功失败标识[成功:1;失败：0]
+	 * 		msg		: 提示信息
+	 * }
+	 */
 	@RequestMapping("/addRelaResource")
 	@ResponseBody
 	public Map<String, Object> addRelaResource(String data) {

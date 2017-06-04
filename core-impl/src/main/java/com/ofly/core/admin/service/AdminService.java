@@ -8,15 +8,31 @@ import org.springframework.stereotype.Service;
 import com.ofly.core.admin.api.IAdminService;
 import com.ofly.core.auth.AuthenManager;
 
+
 /**
- * @author Logan
+ * Introduction	：后台管理Service
+ *
+ * Author		：Logan715                
+ * Create Date	：2017年6月4日 上午10:40:47
  *
  */
 @Service
 public class AdminService implements IAdminService {
 
-	/* (non-Javadoc)
-	 * @see com.ofly.core.admin.api.IAdminService#refresh()
+	/**
+	 * Introduction	：刷新资源权限
+	 *
+	 * Author		：Logan715                
+	 * Create Date	：2017年6月4日 上午10:41:40
+	 * History		: 2017年6月4日 上午10:41:40   Logan715   Created.
+	 * 
+	 * @return		:
+	 * {
+	 * 		code	:成功失败标识[成功:1;失败:0]
+	 * 		msg 	: 提示信息
+	 * }
+	 * @throws Exception		
+	 *
 	 */
 	@Override
 	public Map<String, Object> refresh() throws Exception {
